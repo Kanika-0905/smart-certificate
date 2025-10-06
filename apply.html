@@ -112,14 +112,43 @@ form.addEventListener("submit", function(e){
 
   form.reset();
 });
+  
 
-// Preview updates live on input
+
 form.certName.addEventListener("input", e => document.getElementById("preview-name").innerText = e.target.value);
 form.certDesc.addEventListener("input", e => document.getElementById("preview-desc").innerText = e.target.value);
 form.certType.addEventListener("change", e => {
   const span = document.getElementById("preview-type");
   span.innerText = e.target.value;
   span.className = "badge " + e.target.value;
+  document.getElementById("applyForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const name = document.getElementById("certName").value;
+  const desc = document.getElementById("certDesc").value;
+  const type = document.getElementById("certType").value;
+
+  
+  let appliedCerts = JSON.parse(localStorage.getItem("appliedCerts")) || [];
+  appliedCerts.push({name, desc, type, file:`files/${name.replace(/ /g,"_")}.pdf`});
+  localStorage.setItem("appliedCerts", JSON.stringify(appliedCerts));
+
+ 
+  document.getElementById("preview-name").innerText = name;
+  document.getElementById("preview-desc").innerText = desc;
+  const typeSpan = document.getElementById("preview-type");
+  typeSpan.innerText = type;
+  typeSpan.className = "badge " + type;
+  document.getElementById("preview-card").style.display = "block";
+
+ 
+  const toast = document.getElementById("toast");
+  toast.innerText = `Certificate "${name}" applied successfully!`;
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),3000);
+
+  this.reset();
+});
+
 });
 </script>
 </body>

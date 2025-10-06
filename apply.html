@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply Certificate</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+
+#applyForm input, #applyForm textarea, #applyForm select, #applyForm button {
+  width:100%;padding:10px;margin-bottom:10px;border-radius:6px;border:1px solid #ccc;transition:0.3s;
+}
+#applyForm input:focus, #applyForm textarea:focus, #applyForm select:focus {
+  border-color: #1b2a4e;outline:none;box-shadow:0 0 5px rgba(27,42,78,0.3);
+}
+#applyForm button {
+  background:#1b2a4e;color:#fff;border:none;cursor:pointer;font-weight:600;
+}
+#applyForm button:hover {background:#2e4783;transform:translateY(-2px);}
+
+
+.toast {
+  position:fixed;bottom:20px;right:20px;background:#1abc9c;color:#fff;padding:12px 20px;
+  border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,0.2);opacity:0;transform:translateY(20px);
+  transition:opacity 0.5s, transform 0.5s;z-index:1000;
+}
+.toast.show {opacity:1;transform:translateY(0);}
+#preview-card {
+  margin-top:20px;padding:15px;border-radius:12px;box-shadow:0 5px 12px rgba(0,0,0,0.1);
+  background:#fff;transition:0.3s;display:none;
+}
+#preview-card h4 {color:#1b2a4e;margin-bottom:6px;}
+#preview-card p {color:#555;font-size:0.9rem;margin-bottom:6px;}
+#preview-card .badge {position:absolute;top:10px;right:10px;padding:3px 8px;border-radius:10px;font-size:0.75rem;color:#fff;}
+.academic{background:#0072ce;}
+.workshop{background:#1abc9c;}
+.sports{background:#e67e22;}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <img src="secelogo.jpg" alt="Logo">
+  <h2>Certificate Portal</h2>
+  <div class="nav-item" onclick="location.href='dashboardside.html'"><i class="fas fa-tachometer-alt"></i>Dashboard</div>
+  <div class="nav-item" onclick="location.href='apply.html'"><i class="fas fa-file-alt"></i>Apply Certificate</div>
+  <div class="nav-item" onclick="location.href='downloads.html'"><i class="fas fa-download"></i>Downloads</div>
+  <div class="nav-item" onclick="location.href='progress.html'"><i class="fas fa-chart-line"></i>Progress</div>
+  <div class="nav-item" onclick="location.href='notifications.html'"><i class="fas fa-bell"></i>Notifications</div>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<div class="main-content">
+  <header>
+    <h1>Apply for Certificate</h1>
+    <span id="datetime"></span>
+  </header>
+
+  <form id="applyForm">
+    <label>Certificate Name:</label>
+    <input type="text" id="certName" placeholder="Enter certificate name" required>
+    
+    <label>Description:</label>
+    <textarea id="certDesc" rows="3" placeholder="Brief description" required></textarea>
+    
+    <label>Type:</label>
+    <select id="certType">
+      <option value="academic">Academic</option>
+      <option value="workshop">Workshop</option>
+      <option value="sports">Sports</option>
+    </select>
+    
+    <button type="submit">Apply</button>
+  </form>
+
+ 
+  <div id="preview-card">
+    <h4 id="preview-name"></h4>
+    <p id="preview-desc"></p>
+    <span id="preview-type" class="badge"></span>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast">Certificate applied successfully!</div>
+
+  <footer>© Sri Eshwar College of Engineering | Contact: info@sri-eshwar.ac.in</footer>
+</div>
+
+<script src="script.js"></script>
+<script>
+
+const form = document.getElementById("applyForm");
+const toast = document.getElementById("toast");
+const previewCard = document.getElementById("preview-card");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  const name = document.getElementById("certName").value;
+  const desc = document.getElementById("certDesc").value;
+  const type = document.getElementById("certType").value;
+
+  document.getElementById("preview-name").innerText = name;
+  document.getElementById("preview-desc").innerText = desc;
+  const typeSpan = document.getElementById("preview-type");
+  typeSpan.innerText = type;
+  typeSpan.className = "badge " + type;
+  previewCard.style.display = "block";
+
+  
+  toast.innerText = `Certificate "${name}" applied successfully!`;
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),3000);
+
+  form.reset();
+});
+
+// Preview updates live on input
+form.certName.addEventListener("input", e => document.getElementById("preview-name").innerText = e.target.value);
+form.certDesc.addEventListener("input", e => document.getElementById("preview-desc").innerText = e.target.value);
+form.certType.addEventListener("change", e => {
+  const span = document.getElementById("preview-type");
+  span.innerText = e.target.value;
+  span.className = "badge " + e.target.value;
+});
+</script>
+</body>
+</html>

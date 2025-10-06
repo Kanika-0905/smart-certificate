@@ -1,0 +1,42 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background:linear-gradient(135deg,#f6f8fb,#e9eef6);
+  color:#333;
+  min-height:100vh;
+}
+.sidebar{
+  width:250px;background:#1b2a4e;color:#fff;
+  display:flex;flex-direction:column;padding:30px 20px;
+  position:fixed;height:100%;
+}
+.sidebar h2{text-align:center;margin-bottom:25px;font-size:1.4rem;}
+.sidebar img{width:90px;height:90px;border-radius:50%;display:block;margin:0 auto 15px;}
+.sidebar .nav-item{margin:10px 0;padding:12px 18px;border-radius:8px;display:flex;align-items:center;cursor:pointer;transition:0.3s;}
+.sidebar .nav-item:hover{background:#2e4783;}
+.sidebar .nav-item i{margin-right:10px;}
+.sidebar .logout-btn{margin-top:auto;background:#e74c3c;color:#fff;padding:12px;border:none;border-radius:8px;cursor:pointer;transition:0.3s;}
+.sidebar .logout-btn:hover{background:#c0392b;}
+
+.main-content{margin-left:260px;flex:1;padding:30px;}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;}
+header h1{font-size:1.6rem;color:#1b2a4e;}
+#datetime{font-weight:600;color:#2e4783;}
+
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;}
+.cert-card{background:#fff;padding:15px;border-radius:12px;box-shadow:0 5px 12px rgba(0,0,0,0.08);transition:0.3s;position:relative;}
+.cert-card:hover{transform:scale(1.02);}
+.cert-card h4{color:#1b2a4e;margin-bottom:6px;}
+.cert-card p{color:#555;font-size:0.9rem;margin-bottom:12px;}
+.cert-card button{background:#1b2a4e;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;}
+.cert-card button:hover{background:#2e4783;}
+.badge{position:absolute;top:10px;right:10px;padding:3px 8px;border-radius:10px;font-size:0.75rem;color:#fff;}
+.academic{background:#0072ce;}
+.workshop{background:#1abc9c;}
+.sports{background:#e67e22;}
+
+footer{text-align:center;margin-top:20px;color:#555;font-size:0.9rem;}
+@media(max-width:900px){
+  .sidebar{position:relative;width:100%;flex-direction:row;overflow-x:auto;padding:15px;}
+  .sidebar h2{display:none;}
+  .main-content{margin-left:0;padding:20px;}
+}

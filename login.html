@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sri Eshwar College — Certificate Recommender</title>
+  <style>
+    
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #004aad, #00b4d8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 0;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 42px 48px;
+      width: 480px;
+      max-width: 92vw;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+      backdrop-filter: blur(8px);
+    }
+
+    .college-logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      border: 3px solid rgba(255,255,255,0.9);
+      display: block;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    h2 {
+      margin: 0 0 26px;
+      font-size: 1.7rem;
+      color: #fff;
+      letter-spacing: 0.3px;
+      font-weight: 700;
+    }
+
+    
+    .form-control {
+      width: 100%;
+      height: 52px;              
+      border-radius: 10px;
+      margin: 12px 0;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      text-align: center;      
+      padding: 0 14px;
+      background: rgba(255,255,255,0.95);
+      color: #333;
+    }
+
+    .form-control::placeholder {
+      color: #8a8a8a;
+      opacity: 1;
+    }
+
+    
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 52px;
+      margin-top: 18px;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #004aad;
+      border: none;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      transition: transform .18s ease, background .18s ease, color .18s ease;
+    }
+
+    .btn:hover {
+      background: #00b4d8;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      margin-top: 26px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+    }
+
+   
+    @media (max-width: 420px) {
+      .login-container { padding: 28px 20px; }
+      .college-logo { width: 88px; height: 88px; margin-bottom: 12px; }
+      .form-control, .btn { height: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="login-container">
+    <img class="college-logo"
+         src="d:\Users\HP\Downloads\secelogo.png"
+         alt="Sri Eshwar College Logo">
+
+    <h2>Certificate Recommender Portal</h2>
+
+    <input class="form-control" type="text" id="regno" placeholder="Register Number" required>
+    <input class="form-control" type="password" id="password" placeholder="Password" required>
+
+    <button class="btn" onclick="login()">Login</button>
+
+    <div class="footer">Sri Eshwar College of Engineering, Coimbatore</div>
+  </div>
+
+  <script>
+    function login() {
+      const regno = document.getElementById('regno').value.trim();
+      const pass = document.getElementById('password').value.trim();
+
+      if (!regno || !pass) {
+        alert("⚠ Please fill in both Register Number and Password!");
+        return;
+      }
+
+     
+      localStorage.setItem("regno", regno);
+      window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>

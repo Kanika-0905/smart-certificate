@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Certificate Portal</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<div class="sidebar">
+  <img src="secelogo.jpg" alt="Logo">
+  <h2>Certificate Portal</h2>
+  <div class="nav-item" onclick="location.href='dashboardside.html'"><i class="fas fa-tachometer-alt"></i>Dashboard</div>
+  <div class="nav-item" onclick="location.href='apply.html'"><i class="fas fa-file-alt"></i>Apply Certificate</div>
+  <div class="nav-item" onclick="location.href='downloads.html'"><i class="fas fa-download"></i>Downloads</div>
+  <div class="nav-item" onclick="location.href='progress.html'"><i class="fas fa-chart-line"></i>Progress</div>
+  <div class="nav-item" onclick="location.href='notifications.html'"><i class="fas fa-bell"></i>Notifications</div>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<div class="main-content">
+  <header>
+    <h1>Welcome to Certificate Recommender Portal</h1>
+    <span id="datetime"></span>
+  </header>
+
+  <h3>Certificates</h3>
+  <div class="cert-grid" id="cert-grid"></div>
+
+  <footer>© Sri Eshwar College of Engineering | Contact: info@sri-eshwar.ac.in</footer>
+</div>
+
+<script src="script.js"></script>
+<script>
+
+const certs = [
+  {name:"AI Workshop",desc:"Attended AI Workshop",type:"workshop"},
+  {name:"ML Seminar",desc:"Completed ML Training",type:"academic"},
+  {name:"Sports Meet",desc:"Football Tournament",type:"sports"}
+];
+const grid = document.getElementById("cert-grid");
+certs.forEach(c=>{
+  const card=document.createElement("div");
+  card.className="cert-card";
+  card.innerHTML=`<h4>${c.name}</h4><p>${c.desc}</p>
+    <span class="badge ${c.type}">${c.type}</span>
+    <button onclick="alert('${c.name} downloaded successfully!')">Download</button>`;
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>

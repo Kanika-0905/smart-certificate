@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications | Sri Eshwar Certificate Portal</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #eaf1ff;
+  color: #002B5B;
+}
+
+
+.nav-item {
+  width: 90%;
+  padding: 10px;
+  margin: 5px 0;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.nav-item i {
+  margin-right: 8px;
+}
+.nav-item:hover {
+  background: #2f437c;
+}
+.logout-btn {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 8px 15px;
+  background: #e74c3c;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #002B5B, #004C97);
+  color: #fff;
+  padding: 18px 40px;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+}
+header h1 {
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+header a {
+  background: #fff;
+  color: #004C97;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+header a:hover {
+  background: #dce6f9;
+}
+
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px auto;
+  width: 90%;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.controls input, .controls select {
+  padding: 10px 14px;
+  border: 1px solid #ccd6eb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+}
+.controls input:focus, .controls select:focus {
+  border-color: #004C97;
+}
+.controls button {
+  background: #004C97;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.controls button:hover {
+  background: #005fcc;
+}
+
+
+.notifications {
+  width: 90%;
+  margin: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  padding: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.notification {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #e6efff;
+  transition: background 0.3s;
+}
+.notification:hover {
+  background: #f4f8ff;
+}
+.notification i {
+  font-size: 1.5rem;
+  color: #004C97;
+  background: #e6efff;
+  padding: 10px;
+  border-radius: 10px;
+}
+.notification-content h4 {
+  margin: 0;
+  color: #002B5B;
+  font-size: 1rem;
+}
+.notification-content p {
+  margin: 4px 0 6px;
+  color: #555;
+  font-size: 0.9rem;
+}
+.notification time {
+  font-size: 0.8rem;
+  color: #777;
+}
+.unread {
+  border-left: 4px solid #007BFF;
+  background: #f0f6ff;
+}
+.read {
+  opacity: 0.85;
+}
+
+
+.notifications::-webkit-scrollbar {
+  width: 8px;
+}
+.notifications::-webkit-scrollbar-thumb {
+  background: #ccd6eb;
+  border-radius: 6px;
+}
+.notifications::-webkit-scrollbar-thumb:hover {
+  background: #004C97;
+}
+
+
+footer {
+  text-align: center;
+  padding: 15px;
+  color: #555;
+  font-size: 0.85rem;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <img src="secelogo.jpg" alt="Logo">
+  <h2>Certificate Portal</h2>
+  <div class="nav-item" onclick="location.href='dashboardside.html'"><i class="fas fa-tachometer-alt"></i>Dashboard</div>
+  <div class="nav-item" onclick="location.href='apply.html'"><i class="fas fa-file-alt"></i>Apply Certificate</div>
+  <div class="nav-item" onclick="location.href='downloads.html'"><i class="fas fa-download"></i>Downloads</div>
+  <div class="nav-item" onclick="location.href='progress.html'"><i class="fas fa-chart-line"></i>Progress</div>
+  <div class="nav-item" onclick="location.href='notifications.html'"><i class="fas fa-bell"></i>Notifications</div>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<div class="main-content">
+  <header>
+    <h1>🔔 Notifications — Certificate Recommender Portal</h1>
+    <a href="dashboardside.html">← Back to Dashboard</a>
+  </header>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search notifications..." onkeyup="searchNotifications()">
+    <select id="filter" onchange="filterNotifications()">
+      <option value="all">All Categories</option>
+      <option value="academic">Academic</option>
+      <option value="workshop">Workshop</option>
+      <option value="sports">Sports</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button onclick="markAllRead()">Mark All as Read</button>
+  </div>
+
+  <div class="notifications" id="notifications-list">
+
+    <div class="notification unread" data-type="academic">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <div class="notification-content">
+        <h4>New Academic Certificate Available</h4>
+        <p>Your “Python Programming” course certificate is now ready for download.</p>
+        <time>10 mins ago</time>
+      </div>
+    </div>
+
+    <div class="notification unread" data-type="workshop">
+      <i class="fa-solid fa-chalkboard-user"></i>
+      <div class="notification-content">
+        <h4>Workshop Completion</h4>
+        <p>Your participation in the “AI & ML Bootcamp” has been verified. Download certificate soon.</p>
+        <time>2 hours ago</time>
+      </div>
+    </div>
+
+    <div class="notification" data-type="sports">
+      <i class="fa-solid fa-medal"></i>
+      <div class="notification-content">
+        <h4>Sports Achievement!</h4>
+        <p>You’ve been shortlisted for “College Level Athletics Championship 2025”.</p>
+        <time>1 day ago</time>
+      </div>
+    </div>
+
+    <div class="notification" data-type="admin">
+      <i class="fa-solid fa-bullhorn"></i>
+      <div class="notification-content">
+        <h4>Admin Notice</h4>
+        <p>All students must submit workshop proof documents before <b>Oct 15th</b>.</p>
+        <time>3 days ago</time>
+      </div>
+    </div>
+
+    <div class="notification" data-type="academic">
+      <i class="fa-solid fa-file-circle-check"></i>
+      <div class="notification-content">
+        <h4>Certificate Approved</h4>
+        <p>Your “Data Science Seminar” certificate has been approved by the admin.</p>
+        <time>5 days ago</time>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Sri Eshwar College of Engineering, Coimbatore — Certificate Recommender Portal © 2025
+  </footer>
+</div>
+
+<script>
+function markAllRead(){
+  document.querySelectorAll('.notification').forEach(n=>{
+    n.classList.remove('unread');
+    n.classList.add('read');
+  });
+  alert("✅ All notifications marked as read");
+}
+
+function filterNotifications(){
+  const filter = document.getElementById('filter').value;
+  document.querySelectorAll('.notification').forEach(n=>{
+    n.style.display = (filter === 'all' || n.dataset.type === filter) ? 'flex' : 'none';
+  });
+}
+
+function searchNotifications(){
+  const input = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.notification').forEach(n=>{
+    n.style.display = n.textContent.toLowerCase().includes(input) ? 'flex' : 'none';
+  });
+}
+
+function logout(){
+  alert("Logged out successfully!");
+  location.href = 'login.html';
+}
+</script>
+</body>
+</html>

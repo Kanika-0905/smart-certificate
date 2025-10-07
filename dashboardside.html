@@ -6,6 +6,134 @@
 <title>Dashboard - Certificate Portal</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: #f4f6f9;
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 230px;
+  height: 100%;
+  background: #1b2a4e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+.sidebar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.nav-item {
+  width: 90%;
+  padding: 10px;
+  margin: 5px 0;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.nav-item i { margin-right: 8px; }
+.nav-item:hover {
+  background: #2f437c;
+}
+.logout-btn {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 8px 15px;
+  background: #e74c3c;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+.student-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.student-info div {
+  font-size: 15px;
+}
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.cert-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.cert-card h4 {
+  margin: 10px 0 5px;
+}
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #fff;
+}
+.badge.workshop { background: #2980b9; }
+.badge.academic { background: #27ae60; }
+.badge.sports { background: #e67e22; }
+.cert-card button {
+  margin-top: 10px;
+  background: #1b2a4e;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+.cert-card button:hover {
+  background: #2e4783;
+  transform: translateY(-2px);
+}
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+</style>
 </head>
 <body>
 <div class="sidebar">
@@ -21,33 +149,59 @@
 
 <div class="main-content">
   <header>
-    <h1>Welcome to Certificate Recommender Portal</h1>
+    <h1>Welcome, <span id="studentName">Kanika Karuppusamy</span></h1>
     <span id="datetime"></span>
   </header>
 
-  <h3>Certificates</h3>
+  <h3>Student Details</h3>
+  <div class="student-info">
+    <div><strong>Register No:</strong> 22CS001</div>
+    <div><strong>Department:</strong> Computer Science and Engineering</div>
+    <div><strong>Year:</strong> III Year</div>
+    <div><strong>Email:</strong> kanika@example.com</div>
+    <div><strong>Contact:</strong> +91 98765 43210</div>
+    <div><strong>Advisor:</strong> Prof. Priya Ramesh</div>
+  </div>
+
+  <h3>Your Certificates</h3>
   <div class="cert-grid" id="cert-grid"></div>
 
   <footer>© Sri Eshwar College of Engineering | Contact: info@sri-eshwar.ac.in</footer>
 </div>
 
-<script src="script.js"></script>
 <script>
+// Display current date & time
+function updateDateTime() {
+  const now = new Date();
+  document.getElementById("datetime").innerText = now.toLocaleString();
+}
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
 
 const certs = [
   {name:"AI Workshop",desc:"Attended AI Workshop",type:"workshop"},
   {name:"ML Seminar",desc:"Completed ML Training",type:"academic"},
   {name:"Sports Meet",desc:"Football Tournament",type:"sports"}
 ];
+
 const grid = document.getElementById("cert-grid");
 certs.forEach(c=>{
   const card=document.createElement("div");
   card.className="cert-card";
-  card.innerHTML=`<h4>${c.name}</h4><p>${c.desc}</p>
+  card.innerHTML=`
+    <h4>${c.name}</h4>
+    <p>${c.desc}</p>
     <span class="badge ${c.type}">${c.type}</span>
     <button onclick="alert('${c.name} downloaded successfully!')">Download</button>`;
   grid.appendChild(card);
 });
+
+
+function logout() {
+  alert("Logged out successfully!");
+  location.href = 'login.html';
+}
 </script>
 </body>
 </html>

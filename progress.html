@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Eshwar College | Certificate Dashboard</title>
+<link rel="stylesheet" href="styles.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: #f8f9fa;
+  color: #1a237e;
+}
+
+
+header {
+  background: linear-gradient(90deg, #0d47a1, #1976d2);
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 26px;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+
+.student-info {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.student-info h2 { margin: 0; color: #0d47a1; font-size: 22px; }
+.student-info p { margin: 4px 0; color: #333; }
+.student-info img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #0d47a1;
+}
+
+
+.progress-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.card {
+  background: #fff;
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+  padding: 18px 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.card h4 { margin-bottom: 10px; color: #0d47a1; font-size: 16px; }
+.card span { font-size: 1.6rem; font-weight: 600; color: #0d47a1; }
+
+
+.progress-circles {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.circle-wrapper h4 { margin-bottom: 8px; font-size: 16px; color: #0d47a1; }
+.circle {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: conic-gradient(#0d47a1 var(--percent), #e0e0e0 0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle::before {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: #fff;
+  border-radius: 50%;
+}
+.circle span {
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0d47a1;
+}
+
+
+.chart-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.chart-section h3 {
+  text-align: center;
+  color: #0d47a1;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+/* Timeline */
+.timeline-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.timeline-section h3 {
+  text-align: center;
+  color: #0d47a1;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #1976d2;
+  border-radius: 2px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  background: #0d47a1;
+  border-radius: 50%;
+  border: 2px solid #bbdefb;
+}
+.timeline-item h4 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0d47a1;
+}
+.timeline-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Recommendations */
+.recommendation-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.recommendation-section h3 {
+  text-align: center;
+  color: #0d47a1;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.recommendation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.recommendation-list li {
+  background: #e3f2fd;
+  border-left: 5px solid #0d47a1;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: #0d47a1;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background: #0d47a1;
+  color: #fff;
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+    <div class="sidebar">
+  <img src="secelogo.jpg" alt="Logo">
+  <h2>Certificate Portal</h2>
+  <div class="nav-item" onclick="location.href='dashboardside.html'"><i class="fas fa-tachometer-alt"></i>Dashboard</div>
+  <div class="nav-item" onclick="location.href='apply.html'"><i class="fas fa-file-alt"></i>Apply Certificate</div>
+  <div class="nav-item" onclick="location.href='downloads.html'"><i class="fas fa-download"></i>Downloads</div>
+  <div class="nav-item" onclick="location.href='progress.html'"><i class="fas fa-chart-line"></i>Progress</div>
+  <div class="nav-item" onclick="location.href='notifications.html'"><i class="fas fa-bell"></i>Notifications</div>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+<header>🎓 Certificate Recommender Dashboard</header>
+
+<div class="container">
+
+ 
+  <div class="student-info">
+    <div>
+      <h2>John Doe</h2>
+      <p>Reg No: 21AICS045</p>
+      <p>Department: Artificial Intelligence & Data Science</p>
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Profile">
+  </div>
+
+  
+  <div class="progress-cards">
+    <div class="card"><h4>Total Certificates</h4><span>20</span></div>
+    <div class="card"><h4>Completed</h4><span>13</span></div>
+    <div class="card"><h4>Pending</h4><span>4</span></div>
+    <div class="card"><h4>Applied</h4><span>3</span></div>
+  </div>
+
+  
+  <div class="progress-circles">
+    <div class="circle-wrapper"><h4>Completed</h4><div class="circle" style="--percent:65%;"><span>65%</span></div></div>
+    <div class="circle-wrapper"><h4>Pending</h4><div class="circle" style="--percent:20%;"><span>20%</span></div></div>
+    <div class="circle-wrapper"><h4>Applied</h4><div class="circle" style="--percent:15%;"><span>15%</span></div></div>
+  </div>
+
+ 
+  <div class="chart-section">
+    <h3>📊 Certificate Status Distribution</h3>
+    <canvas id="certStatusChart"></canvas>
+  </div>
+
+  <div class="chart-section">
+    <h3>📈 Certificates Progress Over Time</h3>
+    <canvas id="certProgressChart"></canvas>
+  </div>
+
+ 
+  <div class="timeline-section">
+    <h3>🏆 Achievements Timeline</h3>
+    <div class="timeline">
+      <div class="timeline-item"><h4>2022 — Paper Presentation</h4><p>Presented research paper at AI Conference, Chennai.</p></div>
+      <div class="timeline-item"><h4>2023 — Hackathon Winner</h4><p>Secured 1st place in Smart India Hackathon 2023.</p></div>
+      <div class="timeline-item"><h4>2024 — Internship</h4><p>Completed 3-month internship at TCS in Machine Learning.</p></div>
+    </div>
+  </div>
+
+  
+  <div class="recommendation-section">
+    <h3>🎯 Recommended Certificates</h3>
+    <ul class="recommendation-list">
+      <li>Advanced AI & Deep Learning Certification</li>
+      <li>Data Science & Analytics Professional Certificate</li>
+      <li>Machine Learning Specialization — Coursera</li>
+      <li>Web Development & IoT Integration Course</li>
+      <li>Smart India Hackathon Participation Certificate</li>
+      <li>Python for Data Science — Certificate</li>
+      <li>Cloud Computing Fundamentals Certificate</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>© 2025 Sri Eshwar College of Engineering | AI-Based Certificate Recommender</footer>
+
+<script>
+
+document.querySelectorAll('.circle').forEach(circle => {
+  const value = parseInt(circle.style.getPropertyValue('--percent'));
+  let counter = 0;
+  const span = circle.querySelector('span');
+  const interval = setInterval(() => {
+    counter++;
+    span.textContent = counter + "%";
+    circle.style.background = conic-gradient(#0d47a1 ${counter}%, #e0e0e0 0);
+    if (counter >= value) clearInterval(interval);
+  }, 20);
+});
+
+// Pie Chart - Certificate Status
+const ctxStatus = document.getElementById('certStatusChart').getContext('2d');
+new Chart(ctxStatus, {
+  type: 'pie',
+  data: {
+    labels: ['Completed', 'Pending', 'Applied'],
+    datasets: [{ data: [13,4,3], backgroundColor: ['#0d47a1','#64b5f6','#bbdefb'], borderColor:'#fff', borderWidth:2 }]
+  },
+  options: { responsive:true, plugins:{ title:{ display:true, text:'Certificate Status Distribution', font:{size:16} }, legend:{position:'bottom'} } }
+});
+
+
+const ctxProgress = document.getElementById('certProgressChart').getContext('2d');
+new Chart(ctxProgress, {
+  type: 'line',
+  data: {
+    labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],
+    datasets:[
+      { label:'Completed', data:[1,2,3,4,5,6,7,8], borderColor:'#0d47a1', backgroundColor:'rgba(25,118,210,0.2)', fill:true, tension:0.3 },
+      { label:'Pending', data:[0,0,1,1,2,2,3,3], borderColor:'#64b5f6', backgroundColor:'rgba(100,181,246,0.2)', fill:true, tension:0.3 },
+      { label:'Applied', data:[0,1,1,1,2,2,2,3], borderColor:'#bbdefb', backgroundColor:'rgba(187,222,251,0.2)', fill:true, tension:0.3 }
+    ]
+  },
+  options:{ responsive:true, plugins:{ title:{ display:true, text:'Certificates Progress Over Time', font:{size:16} }, legend:{position:'bottom'} }, scales:{y:{beginAtZero:true}} }
+});
+</script>
+
+</body>
+</html>
